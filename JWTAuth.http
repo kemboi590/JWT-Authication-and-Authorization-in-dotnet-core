@@ -1,0 +1,34 @@
+@JWTAuth_HostAddress = https://localhost:7225
+
+GET {{JWTAuth_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+POST {{JWTAuth_HostAddress}}/api/authentication/register-user
+Content-Type: application/json
+
+{
+  "firstName": "Brian",
+  "lastName": "Kemboi",
+  "email": "bkemboi590@gmail.com",
+  "userName": "kemboi590",
+  "password": "Karibu@2024"
+}
+
+###
+
+POST {{JWTAuth_HostAddress}}/api/authentication/login-user
+Content-Type: application/json
+
+{
+  "email": "bkemboi590@gmail.com",
+  "password": "Karibu@2024"
+}
+
+###
+
+GET {{JWTAuth_HostAddress}}/home
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoia2VtYm9pNTkwIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiJiZWM3NGNkYS1lMzc5LTRmMjgtODVkNC0xYWRmODcyZGY3N2QiLCJlbWFpbCI6ImJrZW1ib2k1OTBAZ21haWwuY29tIiwic3ViIjoiYmtlbWJvaTU5MEBnbWFpbC5jb20iLCJqdGkiOiJmYTEwNjAwYS1mNTQ0LTQzYmMtOWI4ZS1kNTAxNzJkMDZhZmQiLCJleHAiOjE3MzM5ODYwMDcsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcyMjUiLCJhdWQiOiJ1c2VyIn0.a1nxw7rZldPoU0QxaMmEjAMmLVoC4EJ8S4PR8MlKsmY
+
+##
