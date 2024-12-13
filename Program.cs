@@ -11,6 +11,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Get the connection string from the appsettings.json file
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+var tokenValidationParameters = new TokenValidationParameters()
+{
+    ValidateIssuerSigningKey = true,
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
+
+    ValidateIssuer = true,
+    ValidIssuer = builder.Configuration["JWT:Issuer"],
+
+    ValidateAudience = true,
+    ValidAudience = builder.Configuration["JWT:Audience"],
+
+    ValidateLifetime = true,
+    ClockSkew = TimeSpan.Zero
+
+};
+
+builder.Services.AddSingleton(tokenValidationParameters);
+
 // Configure DbContext with SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -32,18 +50,7 @@ builder.Services.AddAuthentication(options =>
     {
         options.SaveToken = true;
         options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters()
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
-
-            ValidateIssuer = true,
-            ValidIssuer = builder.Configuration["JWT:Issuer"],
-            
-            ValidateAudience = true,
-            ValidAudience = builder.Configuration["JWT:Audience"]
-
-        };
+        options.TokenValidationParameters = tokenValidationParameters; //was here
     });
 
 
@@ -66,5 +73,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//seed database
+AppDbInitializer.SeedRolesDb(app).Wait();
 
 app.Run();

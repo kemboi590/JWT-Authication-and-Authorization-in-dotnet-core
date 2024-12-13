@@ -1,21 +1,30 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using JWTAuth.Data.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JWTAuth.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    [Authorize(Roles =UserRoles.Student+","+UserRoles.Manager)]
     public class HomeController : ControllerBase
     {
         public HomeController()
         {
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("students")]
+        [Authorize(Roles = UserRoles.Student)]
+        public IActionResult GetStudent()
         {
-            return Ok("Hello World");
+            return Ok("Wecome to HomeController - Student");
+        }
+
+        [HttpGet("manager")]
+        [Authorize(Roles = UserRoles.Manager)]
+        public IActionResult GetManager()
+        {
+            return Ok("Wecome to HomeController - Manager");
         }
 
     }
