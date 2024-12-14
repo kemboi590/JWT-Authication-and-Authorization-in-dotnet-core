@@ -1,9 +1,6 @@
 @JWTAuth_HostAddress = https://localhost:7225
 
-GET {{JWTAuth_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
+### Register User
 
 POST {{JWTAuth_HostAddress}}/api/authentication/register-user
 Content-Type: application/json
@@ -16,7 +13,7 @@ Content-Type: application/json
   "password": "Karibu@2024"
 }
 
-###
+###  Register User
 POST {{JWTAuth_HostAddress}}/api/authentication/register-user
 Content-Type: application/json
 
@@ -29,35 +26,31 @@ Content-Type: application/json
   "role": "Student"
 }
 
-###
+### Register User
 
 POST {{JWTAuth_HostAddress}}/api/authentication/register-user
 Content-Type: application/json
 
 {
-  "firstName": "Manager",
-  "lastName": "Manager",
-  "email": "Manager@gmail.com",
-  "userName": "Manager",
+  "firstName": "test",
+  "lastName": "test",
+  "email": "test@gmail.com",
+  "userName": "test",
   "password": "Karibu@2024",
-  "role": "Manager"
+  "role": "Student"
 }
 
-###
+### Login User
 
 POST {{JWTAuth_HostAddress}}/api/authentication/login-user
 Content-Type: application/json
 
 {
-  "email": "Manager@gmail.com",
+  "email": "test@gmail.com",
   "password": "Karibu@2024"
 }
 
-###
-
-GET {{JWTAuth_HostAddress}}/home
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWFuYWdlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMzA0NzhkZTMtMWFiMy00ZjEzLWFjM2UtMmY1ZjQyMDBhZjk0IiwiZW1haWwiOiJNYW5hZ2VyQGdtYWlsLmNvbSIsInN1YiI6Ik1hbmFnZXJAZ21haWwuY29tIiwianRpIjoiYjkxMDM2NWUtODM0OS00YmY2LTkxZmEtN2RhNzYyN2RjZDFlIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiTWFuYWdlciIsImV4cCI6MTczNDAwMTcwMywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIyNSIsImF1ZCI6InVzZXIifQ.NwEjPrMddn5j14N732EBF5_whyTXrIlmjrmjWpu-T24
-###
+### Refresh Token
 
 POST {{JWTAuth_HostAddress}}/api/authentication/refresh-token
 Content-Type: application/json
@@ -70,21 +63,26 @@ Content-Type: application/json
 
 ###
 
-GET {{JWTAuth_HostAddress}}/management
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3R1ZGVudCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiOGFlZWE5NTctNmM3NC00OGI4LTgzMzgtNmE0ZWI0OTcxZTZkIiwiZW1haWwiOiJzdHVkZW50QGdtYWlsLmNvbSIsInN1YiI6InN0dWRlbnRAZ21haWwuY29tIiwianRpIjoiYzk2MTE4NjgtNTJkZC00NGQwLWJmM2ItZjI5NjIwZjRmMmE2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3R1ZGVudCIsImV4cCI6MTczNDAwMTkyMCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIyNSIsImF1ZCI6InVzZXIifQ.zRxnn5dDzVzaWyzs41vtMpTP6tIYMD20rbQ7xPlGN_s
+GET {{JWTAuth_HostAddress}}/home
+Authorization: Bearer 
 
-###
+### Get Manager's page
+
+GET {{JWTAuth_HostAddress}}/management
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiZDdkODZiMjItYTRkYy00MjZhLWFmYjctOGNkMWVlMjM5MmE4IiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsInN1YiI6InRlc3RAZ21haWwuY29tIiwianRpIjoiODIyNmIwYzItMjM2Ni00OThlLTgyOGItMDA3MTE5ZTkxMjBhIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3R1ZGVudCIsImV4cCI6MTczNDE3OTQ2NywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIyNSIsImF1ZCI6InVzZXIifQ.TZf9RwLMfcTREDAQ1RCzOVpYa4uuvSRMBniXuAemCCM
+
+### Get Student's page
 
 GET {{JWTAuth_HostAddress}}/student
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3R1ZGVudCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiOGFlZWE5NTctNmM3NC00OGI4LTgzMzgtNmE0ZWI0OTcxZTZkIiwiZW1haWwiOiJzdHVkZW50QGdtYWlsLmNvbSIsInN1YiI6InN0dWRlbnRAZ21haWwuY29tIiwianRpIjoiYzk2MTE4NjgtNTJkZC00NGQwLWJmM2ItZjI5NjIwZjRmMmE2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3R1ZGVudCIsImV4cCI6MTczNDAwMTkyMCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIyNSIsImF1ZCI6InVzZXIifQ.zRxnn5dDzVzaWyzs41vtMpTP6tIYMD20rbQ7xPlGN_s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidGVzdCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiZDdkODZiMjItYTRkYy00MjZhLWFmYjctOGNkMWVlMjM5MmE4IiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsInN1YiI6InRlc3RAZ21haWwuY29tIiwianRpIjoiODIyNmIwYzItMjM2Ni00OThlLTgyOGItMDA3MTE5ZTkxMjBhIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3R1ZGVudCIsImV4cCI6MTczNDE3OTQ2NywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIyNSIsImF1ZCI6InVzZXIifQ.TZf9RwLMfcTREDAQ1RCzOVpYa4uuvSRMBniXuAemCCM
 
-###
+### Get Student's home page
 
 GET {{JWTAuth_HostAddress}}/home/students
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWFuYWdlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMzA0NzhkZTMtMWFiMy00ZjEzLWFjM2UtMmY1ZjQyMDBhZjk0IiwiZW1haWwiOiJNYW5hZ2VyQGdtYWlsLmNvbSIsInN1YiI6Ik1hbmFnZXJAZ21haWwuY29tIiwianRpIjoiZjVjMjE3OGUtYTNkOS00OGM1LWI3ODUtOTE4NDQ1ODU0ODFkIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiTWFuYWdlciIsImV4cCI6MTczNDAwMjYzNSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIyNSIsImF1ZCI6InVzZXIifQ.mLUH26iwGVynfYvsj5OSTwWFBf6qLhR5ExrHaConQ_o
 
 
-###
+### Get Manager's home page
 
 GET {{JWTAuth_HostAddress}}/home/manager
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTWFuYWdlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMzA0NzhkZTMtMWFiMy00ZjEzLWFjM2UtMmY1ZjQyMDBhZjk0IiwiZW1haWwiOiJNYW5hZ2VyQGdtYWlsLmNvbSIsInN1YiI6Ik1hbmFnZXJAZ21haWwuY29tIiwianRpIjoiZjVjMjE3OGUtYTNkOS00OGM1LWI3ODUtOTE4NDQ1ODU0ODFkIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiTWFuYWdlciIsImV4cCI6MTczNDAwMjYzNSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIyNSIsImF1ZCI6InVzZXIifQ.mLUH26iwGVynfYvsj5OSTwWFBf6qLhR5ExrHaConQ_o

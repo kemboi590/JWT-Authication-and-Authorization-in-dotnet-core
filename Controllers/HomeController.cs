@@ -12,6 +12,11 @@ namespace JWTAuth.Controllers
         public HomeController()
         {
         }
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok("Wecome to HomeController - Main");
+        }
 
         [HttpGet("students")]
         [Authorize(Roles = UserRoles.Student)]
