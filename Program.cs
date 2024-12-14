@@ -8,13 +8,17 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Get the connection string from the appsettings.json file
+//1. Get the connection string from the appsettings.json file
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+//get the JWT secret key from the appsettings.json file
+var secret = builder.Configuration["JWT:Secret"] ?? throw new ArgumentNullException("JWT:Secret", "JWT secret key is not configured.");
+
+//This section defines how JWT tokens are validated when they are received by the API. 
 var tokenValidationParameters = new TokenValidationParameters()
 {
     ValidateIssuerSigningKey = true,
-    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"])),
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
 
     ValidateIssuer = true,
     ValidIssuer = builder.Configuration["JWT:Issuer"],
@@ -29,16 +33,16 @@ var tokenValidationParameters = new TokenValidationParameters()
 
 builder.Services.AddSingleton(tokenValidationParameters);
 
-// Configure DbContext with SQL Server
+//2. Configure DbContext with SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Add Identity
+//3.  Add Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
-// Add JWT Authentication
+//4.  Add JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
