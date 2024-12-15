@@ -8,15 +8,15 @@ namespace JWTAuth.Data.Models
         [Key]
         public int Id { get; set; }
 
-        public string Token { get; set; }
-        public string JwtId { get; set; }
+        public required string Token { get; set; }
+        public required string JwtId { get; set; }
         public bool  IsRevoked { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime DateExipire { get; set; }
 
         // Foreign Key
-        public string UserId { get; set; }
-        [ForeignKey(nameof(UserId))]
-        public ApplicationUser User { get; set; }
+        public required string UserId { get; set; } // UserId is a foreign key that references the Id property of the ApplicationUser class
+        [ForeignKey(nameof(UserId))] 
+        public required ApplicationUser User { get; set; }
     }
 }

@@ -15,6 +15,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 var secret = builder.Configuration["JWT:Secret"] ?? throw new ArgumentNullException("JWT:Secret", "JWT secret key is not configured.");
 
 //This section defines how JWT tokens are validated when they are received by the API. 
+// tokenValidationParameters is used to configure the validation parameters for the JWT tokens. 
 var tokenValidationParameters = new TokenValidationParameters()
 {
     ValidateIssuerSigningKey = true,
@@ -42,14 +43,14 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
-//4.  Add JWT Authentication
+//4.  Add JWT Authentication - AddAuthentication is used to configure the authentication services
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-    //Add JWT Bearer
+    //Add JWT Bearer - used to configure the authentication scheme, validate the token, and extract claims from the token
     .AddJwtBearer(options =>
     {
         options.SaveToken = true;
